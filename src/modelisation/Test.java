@@ -38,32 +38,50 @@ class Test {
 		dfs(g, 3);
 	}
 
-	public static void main(String[] args) {
-		// testGraph();
-
+	public static int[][] gen(int i, int j) {
 		Random r = new Random();
 
-		int[][] image = new int[3][3];
-		int i, j;
+		int[][] image = new int[i][j];
+		
+		int ligne, colone;
 
-		for (i = 0; i < image.length; i++) {
-			for (j = 0; j < image[0].length; j++) {
+		for (ligne = 0; ligne < image.length; ligne++) {
+			for (colone = 0; colone < image[0].length; colone++) {
 
-				image[i][j] = r.nextInt(255);
-				System.out.print(image[i][j]+" ");
+				image[ligne][colone] = r.nextInt(255);
+				System.out.print(image[ligne][colone] + " ");
 
 			}
 			System.out.println();
 
 		}
 		System.out.println("-----------------------------");
+		return image;
+	}
+
+	public static void main(String[] args) {
+		// testGraph();
+
+		int bidule = Integer.MAX_VALUE;
+		
+		int[][] prof = { { 3, 11, 24, 39 }, { 8, 21, 29, 39 },
+				{ 74, 80, 100, 200 } };
+
+		int[][] image = gen(3, 4);
+
+		Graph gh = new Graph((4 * 3) + 2);
 
 		SeamCarving sc = new SeamCarving();
 		// Q1
 		sc.writepgm(image, "bidule");
 		// Q2
-		sc.interest(image);
+		int[][] itr = sc.interest(prof);
 		System.out.println("done !");
+
+		gh.tograph(itr);
+
+		gh.writeFile("truc.txt");
+		// System.out.println(bidule);
 		// new fenetre();
 
 	}

@@ -9,6 +9,10 @@ import java.util.Scanner;
 
 public class SeamCarving {
 
+	public Graph tograph(int[][] itr) {
+		return null;
+	}
+
 	public void writepgm(int[][] image, String filename) {
 
 		try {
@@ -16,17 +20,19 @@ public class SeamCarving {
 			FileWriter fw = new FileWriter(filename + ".pgm");
 
 			BufferedWriter data = new BufferedWriter(fw);
-			data.write("P2\n# CREATOR: XV Version 3.10a  Rev: 12/29/94\n"
-					+ image.length + " " + image[0].length + "\n255\n");
+			data.write("P2\n"  + image[0].length+" " + image.length+" "
+					+ "\n255\n");
 
 			int i = 0;
 			int j = 0;
 			for (i = 0; i < image.length; i++) {
 				for (j = 0; j < image[0].length; j++) {
 
-					data.write(image[i][j] + "");
+					data.write(image[i][j] + " ");
 
 				}
+
+				data.write("\n");
 
 			}
 
@@ -53,13 +59,16 @@ public class SeamCarving {
 
 				if (colone > 0 && colone < maxj - 1) {
 					tmp++;
-					interest[ligne][colone] = Math.abs(image[ligne][colone]
-							- ((image[ligne][colone - 1] + image[ligne][colone + 1]) / 2));
+					interest[ligne][colone] = Math
+							.abs(image[ligne][colone]
+									- ((image[ligne][colone - 1] + image[ligne][colone + 1]) / 2));
 				} else if (colone == 0) {
 					tmp = 0;
-					interest[ligne][colone] = Math.abs(image[ligne][colone] - (image[ligne][colone + 1]));
+					interest[ligne][colone] = Math.abs(image[ligne][colone]
+							- (image[ligne][colone + 1]));
 				} else if (colone == maxj - 1) {
-					interest[ligne][colone] = Math.abs(image[ligne][colone] - (image[ligne][colone - 1]));
+					interest[ligne][colone] = Math.abs(image[ligne][colone]
+							- (image[ligne][colone - 1]));
 				}
 				System.out.print(interest[ligne][colone] + " ");
 
